@@ -13,7 +13,7 @@ def add_metadata_columns(df, boutique, ville, pays, devise):
     )
 
 
-def add_ids(df, start_id):
+def add_ids(df, start_id: int):
     return df.withColumn(
         "ID_Vente",
         F.monotonically_increasing_id() + start_id + 1
