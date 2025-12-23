@@ -10,13 +10,14 @@ authors = [{ name = "Hugo Boulenger" }]
 readme = "README.md"
 requires-python = ">=3.8"
 
-[project.urls]
-Repository = "https://github.com/hugoboulengeraubay/sales_pipeline"
 
 dependencies = [
     "pyspark",
     "pyyaml"
 ]
+
+[project.urls]
+Repository = "https://github.com/hugoboulengeraubay/sales_pipeline"
 
 [project.optional-dependencies]
 dev = [
