@@ -5,6 +5,11 @@ on:
     branches: [ "main" ]
   pull_request:
 
+# AJOUT IMPORTANT : Permissions pour permettre l'écriture du package
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   test-and-build:
     runs-on: ubuntu-latest
@@ -36,10 +41,10 @@ jobs:
 
       - name: Publish to GitHub Packages
         env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+          # SUR GITHUB PACKAGES, LE USER EST L'ACTEUR ET LE MDP EST LE TOKEN AUTOMATIQUE
+          TWINE_USERNAME: ${{ github.actor }}
+          TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
           twine upload \
             --repository-url https://pypi.pkg.github.com/hugoboulengeraubay \
             dist/*
-            
