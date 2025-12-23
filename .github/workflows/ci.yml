@@ -41,10 +41,10 @@ jobs:
 
       - name: Publish to GitHub Packages
         env:
-          # SUR GITHUB PACKAGES, LE USER EST L'ACTEUR ET LE MDP EST LE TOKEN AUTOMATIQUE
           TWINE_USERNAME: ${{ github.actor }}
           TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
           twine upload \
-            --repository-url https://pypi.pkg.github.com/hugoboulengeraubay/sales_pipeline \
+            --repository-url https://pypi.pkg.github.com/hugoboulengeraubay/ \
+            --verbose \
             dist/*
