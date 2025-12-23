@@ -1,0 +1,11 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Pytest
+.pytest_cache/
+
+# Build / packaging
+dist/
+build/
+*.egg-info/

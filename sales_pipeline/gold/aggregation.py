@@ -87,3 +87,59 @@ def aggregate_gold(spark: SparkSession):
         "classement_nombre": df_classement_nombre,
         "classement_montant": df_classement_montant
     }
+
+
+
+# Pour le test CI (à modifier)
+def compute_gold_from_df(df_silver):
+    """
+    Calcul Gold à partir d'un DataFrame Silver (testable en CI)
+    """
+    taux = {
+        "EUR": 1.0,
+        "DOL": 0.86,
+        "JPY": 0.0057
+    }
+
+    df = df_silver.withColumn(
+        "Montant_EUR",
+        F.when(F.col("Devise") == "EUR", F.col("Montant_Total"))
+         .when(F.col("Devise") == "DOL", F.col("Montant_Total") * taux["DOL"])
+         .when(F.col("Devise") == "JPY", F.col("Montant_Total") * taux["JPY"])
+    )
+
+    df = df.withColumn(
+        "Annee_Mois",
+        F.date_format(
+            F.to_date("Date_Vente", "dd/MM/yyyy"),
+            "yyyy-MM"
+        )
+    )
+
+    df_CA_gold = (
+        df.groupBy("Annee_Mois")
+          .agg(F.round(F.sum("Montant_EUR"), 2).alias("CA_EUR"))
+    )
+
+    df_CA_par_boutique = (
+        df.groupBy("Nom_Boutique", "Annee_Mois")
+          .agg(F.round(F.sum("Montant_EUR"), 2).alias("CA_EUR"))
+    )
+
+    df_classement_nombre = (
+        df.groupBy("Nom_Produit")
+          .agg(F.sum("Quantité").alias("Total"))
+    )
+
+    df_classement_montant = (
+        df.groupBy("Nom_Produit")
+          .agg(F.round(F.sum("Montant_EUR"), 2).alias("Vente_Total"))
+    )
+
+    return {
+        "CA_gold": df_CA_gold,
+        "CA_par_boutique": df_CA_par_boutique,
+        "classement_nombre": df_classement_nombre,
+        "classement_montant": df_classement_montant
+    }
+
