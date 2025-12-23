@@ -39,11 +39,12 @@ jobs:
         run: pip install twine
 
       - name: Publish to GitHub Packages
-        env:
-          TWINE_USERNAME: ${{ github.actor }}
-          TWINE_PASSWORD: ${{ secrets.GH_PAT }}
         run: |
-          twine upload \
-            --repository-url https://pypi.pkg.github.com/${{ github.repository_owner }}/ \
-            --verbose \
-            dist/*
+          echo "[distutils]" > ~/.pypirc
+          echo "index-servers = github" >> ~/.pypirc
+          echo "[github]" >> ~/.pypirc
+          echo "repository = https://pypi.pkg.github.com/${{ github.repository_owner }}/" >> ~/.pypirc
+          echo "username = ${{ github.actor }}" >> ~/.pypirc
+          echo "password = ${{ secrets.GH_PAT }}" >> ~/.pypirc
+          
+          twine upload --repository github dist/* --verbose
