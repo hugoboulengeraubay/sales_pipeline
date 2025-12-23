@@ -40,6 +40,6 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: |
           twine upload \
-            --repository-url https://upload.pypi.github.io/hugoboulengeraubay/ \
+            --repository-url https://upload.pkg.github.com/hugoboulengeraubay/sales_pipeline \
             dist/*
             
