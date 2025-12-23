@@ -31,8 +31,14 @@ jobs:
         run: |
           python -m build
 
-      - name: Upload package artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: sales_pipeline_package
-          path: dist/*
+      - name: Install Twine
+        run: pip install twine
+
+      - name: Publish to GitHub Packages
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          twine upload \
+            --repository-url https://pypi.pkg.github.com/hugoboulengeraubay \
+            dist/*
