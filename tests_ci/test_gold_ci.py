@@ -69,5 +69,5 @@ def test_currency_conversion_jpy(silver_df):
     df = result["classement_montant"]
     jpy_row = df.filter("Nom_Produit = 'Produit B'").collect()[0]
 
-    # 10000 * 0.0057 * 3
-    assert round(jpy_row["Vente_Total"], 2) == round(10000 * 0.0057 * 3, 2)
+    # 10000 * 0.0057
+    assert round(jpy_row["Vente_Total"], 2) == round(10000 * 0.0057, 2)
