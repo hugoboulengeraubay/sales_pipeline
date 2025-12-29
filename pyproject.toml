@@ -3,8 +3,8 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sales-pipeline-hugo" 
-version = "0.1.0"
+name = "sales_pipeline" 
+version = "0.1.1"
 description = "Pipeline de traitement Spark Bronze / Silver / Gold"
 authors = [{ name = "Hugo Boulenger" }]
 readme = "README.md"
