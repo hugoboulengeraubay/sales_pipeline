@@ -39,5 +39,5 @@ jobs:
         run: |
           pip install twine
           twine upload \
-            --repository-url https://upload.pypi.pkg.github.com/${{ github.repository_owner }}/ \
+            --repository-url https://upload.pkg.github.com/ \
             dist/*
