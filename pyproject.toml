@@ -16,9 +16,6 @@ dependencies = [
     "pyyaml"
 ]
 
-[project.urls]
-Repository = "https://github.com/hugoboulengeraubay/sales_pipeline"
-
 [project.optional-dependencies]
 dev = [
     "pytest",

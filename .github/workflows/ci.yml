@@ -2,7 +2,7 @@ name: CI - Sales Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -35,9 +35,9 @@ jobs:
       - name: Publish to GitHub Packages
         env:
           TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.GH_PAT }}
+          TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pip install twine
           twine upload \
-            --repository-url https://upload.pkg.github.com/hugoboulengeraubay/sales_pipeline \
+            --repository-url https://pypi.pkg.github.com/hugoboulengeraubay \
             dist/*
