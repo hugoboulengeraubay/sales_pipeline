@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sales_pipeline" 
+name = "sales-pipeline" 
 version = "0.1.1"
 description = "Pipeline de traitement Spark Bronze / Silver / Gold"
 authors = [{ name = "Hugo Boulenger" }]
