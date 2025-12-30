@@ -1,10 +1,10 @@
 import logging
 
-from sales_pipeline.utils.spark_session import get_spark_session
-from sales_pipeline.bronze.ingestion import ingest_bronze
-from sales_pipeline.silver.cleaning import clean_silver
-from sales_pipeline.gold.aggregation import aggregate_gold
-from sales_pipeline.utils.logging_config import setup_logging
+from utils.spark_session import get_spark_session
+from bronze.ingestion import ingest_bronze
+from silver.cleaning import clean_silver
+from gold.aggregation import aggregate_gold
+from utils.logging_config import setup_logging
 
 
 def main():
