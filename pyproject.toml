@@ -24,8 +24,7 @@ dev = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["sales_pipeline"]
-include = ["sales_pipeline*"]
+where = ["."]
 
 [project.scripts]
 sales-pipeline = "sales_pipeline.main:main"
