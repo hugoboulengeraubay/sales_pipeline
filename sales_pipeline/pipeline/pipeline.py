@@ -7,9 +7,8 @@ from sales_pipeline.gold.aggregation import aggregate_gold
 from sales_pipeline.utils.logging_config import setup_logging
 
 
-def main():
+def main(dbutils=None):
     setup_logging()
-
     logger = logging.getLogger(__name__)
     logger.info("Starting Sales Pipeline")
 
@@ -22,10 +21,10 @@ def main():
     )
 
     clean_silver(spark)
-
     aggregate_gold(spark)
 
     logger.info("Sales Pipeline finished successfully")
+
 
 
 if __name__ == "__main__":
