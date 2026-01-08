@@ -1,10 +1,14 @@
 import logging
-from pyspark.sql import SparkSession, functions as F
+from pyspark.sql import SparkSession, DataFrame, functions as F
 
 logger = logging.getLogger(__name__)
 
 
-def add_metadata_columns(df, boutique, ville, pays, devise):
+def add_metadata_columns(df: DataFrame,
+                        boutique: str,
+                        ville: str,
+                        pays: str,
+                        devise: str) -> DataFrame:
     return (
         df.withColumn("Nom_Boutique", F.lit(boutique))
           .withColumn("Ville", F.lit(ville))
@@ -13,21 +17,21 @@ def add_metadata_columns(df, boutique, ville, pays, devise):
     )
 
 
-def add_ids(df, start_id: int):
+def add_ids(df: DataFrame, start_id: int) -> DataFrame:
     return df.withColumn(
         "ID_Vente",
         F.monotonically_increasing_id() + start_id + 1
     )
 
 
-def harmonize_dates(df, input_format):
+def harmonize_dates(df: DataFrame, input_format: str) -> DataFrame:
     return df.withColumn(
         "Date_Vente",
         F.date_format(F.to_date("Date_Vente", input_format), "dd/MM/yyyy")
     )
 
 
-def translate_products(df, df_catalogue):
+def translate_products(df: DataFrame, df_catalogue: DataFrame) -> DataFrame:
     df = df.join(
         df_catalogue.select("Nom_Produit_Anglais", "Nom_Produit_Francais"),
         df["Nom_Produit"] == F.col("Nom_Produit_Anglais"),
@@ -39,7 +43,7 @@ def translate_products(df, df_catalogue):
     )
 
 
-def translate_categories(df, df_catalogue):
+def translate_categories(df: DataFrame, df_catalogue: DataFrame) -> DataFrame:
     df = df.join(
         df_catalogue.select(
             "Catégorie_Anglais", "Catégorie_Francais"
@@ -53,7 +57,7 @@ def translate_categories(df, df_catalogue):
     )
 
 
-def clean_silver(spark: SparkSession):
+def clean_silver(spark: SparkSession) -> None:
     """
     Nettoyage, harmonisation et construction de la table Silver 'ventes'.
     """

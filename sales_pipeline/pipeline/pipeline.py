@@ -28,4 +28,4 @@ def main(dbutils=None):
 
 
 if __name__ == "__main__":
-    main()
+    main(dbutils=dbutils)

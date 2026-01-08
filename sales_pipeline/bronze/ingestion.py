@@ -1,4 +1,5 @@
 import logging
+from typing import Any
 from pyspark.sql import SparkSession
 
 logger = logging.getLogger(__name__)
@@ -7,8 +8,8 @@ logger = logging.getLogger(__name__)
 def ingest_bronze(
     spark: SparkSession,
     data_root: str,
-    dbutils
-):
+    dbutils: Any
+) -> None:
     """
     Ingestion des fichiers CSV depuis DBFS vers les tables Bronze (Delta).
 

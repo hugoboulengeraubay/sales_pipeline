@@ -1,10 +1,11 @@
 import logging
-from pyspark.sql import SparkSession, functions as F
+from typing import Dict
+from pyspark.sql import DataFrame, SparkSession, functions as F
 
 logger = logging.getLogger(__name__)
 
 
-def aggregate_gold(spark: SparkSession):
+def aggregate_gold(spark: SparkSession) -> Dict[str, DataFrame]:
     """
     Calcule les tables Gold :
     - Chiffre d'affaires mensuel
@@ -91,7 +92,7 @@ def aggregate_gold(spark: SparkSession):
 
 
 # Pour le test CI (à modifier)
-def compute_gold_from_df(df_silver):
+def compute_gold_from_df(df_silver) -> Dict[str, DataFrame]:
     """
     Calcul Gold à partir d'un DataFrame Silver (testable en CI)
     """
