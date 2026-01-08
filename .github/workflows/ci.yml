@@ -1,4 +1,4 @@
-name: CI - Sales Pipeline
+name: CI/CD - Sales Pipeline
 
 on:
   push:
